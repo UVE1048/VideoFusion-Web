@@ -4,6 +4,7 @@
 [![Cesium](https://img.shields.io/badge/Cesium-1.x-48b.svg)](https://cesium.com/)
 [![EarthSDK3](https://img.shields.io/badge/EarthSDK3-video%20fusion-1f6feb.svg)](https://www.earthsdk.com/)
 [![Stars](https://img.shields.io/github/stars/UVE1048/VideoFusion-Web?style=social)](https://github.com/UVE1048/VideoFusion-Web/stargazers)
+[![CI](https://github.com/UVE1048/VideoFusion-Web/actions/workflows/ci.yml/badge.svg)](https://github.com/UVE1048/VideoFusion-Web/actions/workflows/ci.yml)
 
 **把无人机实时视频按相机位姿投影到三维实景模型表面 —— 视频融合投射方案的架构与实现要点。**
 
