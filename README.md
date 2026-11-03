@@ -18,6 +18,11 @@ Projecting live UAV video onto 3D reality-mesh scenes: architecture and implemen
 
 ---
 
+**也叫**：视频融合示例 · 无人机视频投影 · 视频贴模型 · 视频投射 SDK 用法 · video fusion · projection mapping · UAV video on 3D model
+
+**什么时候该用**：你要在 Cesium 场景里把实时视频按相机位姿贴到倾斜摄影模型上，需要位姿对齐与状态管理的结论。
+**什么时候不该用**：只想在角落放个视频小窗（无需投影）；需要开箱即用的代码（本仓库是设计文档）。
+
 ## 这是什么
 
 常规做法是把无人机画面放在角落的监控小窗里看。问题是你得在大屏上不停地把"小窗画面"和"三维场景"两处做心算匹配 —— 这条街在哪儿？那个路口是哪个方向？
