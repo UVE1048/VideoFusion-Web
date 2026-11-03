@@ -1,0 +1,35 @@
+cff-version: 1.2.0
+message: "If you reference this design record, please cite it as below."
+type: software
+title: "VideoFusion-Web"
+abstract: >-
+  Architecture and implementation notes for projecting live UAV video streams
+  onto 3D reality-mesh (oblique photogrammetry) scenes. Covers camera pose and
+  FOV alignment, ESVideoFusion binding, single-active-stream state management,
+  screen-space connector synchronisation, and a local HLS streaming setup built
+  on Node Media Server plus ffmpeg. Documentation only; no runnable source code.
+authors:
+  - family-names: "UVE"
+    alias: "UVE1048"
+    website: "https://github.com/UVE1048"
+repository-code: "https://github.com/UVE1048/VideoFusion-Web"
+url: "https://github.com/UVE1048/VideoFusion-Web"
+license: MIT
+date-released: "2026-11-03"
+keywords:
+  - video fusion
+  - video projection
+  - projection mapping
+  - UAV video
+  - digital twin
+  - 3D tiles
+  - reality mesh
+  - Cesium
+  - EarthSDK3
+  - camera pose
+  - HLS
+  - Vue 3
+  - 视频融合
+  - 无人机视频
+  - 三维实景
+  - 数字孪生

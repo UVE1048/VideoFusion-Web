@@ -1,0 +1,58 @@
+# VideoFusion-Web
+
+> Architecture and implementation notes for projecting live UAV video onto 3D reality-mesh scenes. Vue 3 + Cesium + EarthSDK3. Documentation only, no runnable source code.
+
+Instead of showing drone footage in a corner monitor window and asking the
+operator to mentally map it onto the 3D scene, this approach projects the video
+frame onto the mesh surface itself, so imagery and terrain share one coordinate
+space and occlusion, orientation, and coverage all stay consistent.
+
+The hard part is not the API call. It is aligning camera extrinsics (position and
+attitude), intrinsics (FOV and aspect ratio), and the model coordinate system. Any
+mismatch shifts the entire projection. The second hard part is managing state
+across multiple video streams: only one stream is projected at a time by design,
+because concurrent projections visually interfere and multiply WebGL texture
+memory.
+
+## Documented architecture
+
+- `src/components/CesiumViewer.vue` - the core: Cesium/EarthSDK3 init, ArcGIS
+  imagery basemap, 3D Tiles loading, creation of drone entities and their
+  `ESVideoFusion` projection objects, click-to-activate camera flyTo, screen-space
+  connector synchronisation, and Home reset.
+- `src/config/drones.js` - per-drone config: id, label, video URL, position,
+  attitude, FOV, aspect ratio.
+- `stream_server/start_stream.js` - Node Media Server for RTMP ingest plus an HTTP
+  server on port 8088 serving HLS; ffmpeg slices a local MP4 into `index.m3u8` and
+  `.ts` segments to emulate a live feed.
+- `vite.config.js` - Vite plugins plus static asset copying for Cesium and
+  EarthSDK.
+
+## Notable conclusions
+
+A single `<video>` element is reused; activation rebinds it to another
+`ESVideoFusion` instance rather than recreating it, which avoids repeated decoder
+initialisation stalls. Connector lines update inside the render loop, not on a
+timer, otherwise they detach as soon as the camera moves. Home reset must clear
+camera position, projection toggle, and selected-thumbnail state together.
+
+## Known issues
+
+Cesium Ion token was hardcoded in the original project and must be moved to an
+environment variable before publishing. Canvas size is bounded by GPU texture
+limits (4096x2160). Slice-based HLS has inherent multi-second latency; lower
+latency requires WebRTC.
+
+## Keywords
+
+video fusion, video projection, projection mapping, UAV video, drone surveillance,
+digital twin, 3D tiles, reality mesh, oblique photogrammetry, Cesium, EarthSDK3,
+camera pose, extrinsics, FOV, frustum, HLS, RTMP, Vue 3,
+视频融合, 视频投射, 无人机视频, 三维实景, 倾斜摄影, 数字孪生
+
+## License
+
+MIT for this documentation. No third-party code is included. Cesium (Apache-2.0),
+EarthSDK3 (commercial license), Vue 3 (MIT), Node Media Server (MIT), and ffmpeg
+(LGPL/GPL) keep their own terms. EarthSDK3's video fusion capability is a
+commercial component requiring its own license.
